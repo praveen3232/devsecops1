@@ -1,0 +1,12 @@
+rules:
+  - id: owasp.injection.java.sql.Statement
+    message: "SQL Injection detected due to dynamic SQL Query creation in java.sql.Statement.executeQuery()"
+    metadata:
+      cwe: "CWE-89"
+      owasp: "A1:2017-Injection"
+      source-rule-url: "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
+    severity: ERROR
+    patterns:
+      - "$W.executeQuery($X + $Y, ...);"
+      - "$SQL = $X + $Y; ... $W.executeQuery($SQL, ...);"
+    languages: [java]
